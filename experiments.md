@@ -318,49 +318,47 @@ Import the group:
 The generating set is
 
 $$
-\begin{aligned}
-s_1 &=
+s_1 =
 \begin{pmatrix}
 -1&-1&0\\
 0&-1&0\\
 0&0&1
-\end{pmatrix},
-&
-s_2 &=
+\end{pmatrix}
+\qquad
+s_2 =
 \begin{pmatrix}
 -1&1&0\\
 0&-1&0\\
 0&0&1
-\end{pmatrix},
-\\[1em]
-s_3 &=
+\end{pmatrix}
+\qquad
+s_3 =
 \begin{pmatrix}
 1&0&-1\\
 0&1&0\\
 0&0&1
-\end{pmatrix},
-&
-s_4 &=
+\end{pmatrix}
+\qquad
+s_4 =
 \begin{pmatrix}
 1&0&0\\
 0&-1&-1\\
 0&0&-1
-\end{pmatrix},
-\\[1em]
-s_5 &=
+\end{pmatrix}
+\qquad
+s_5 =
 \begin{pmatrix}
 1&0&0\\
 0&-1&1\\
 0&0&-1
-\end{pmatrix},
-&
-s_6 &=
+\end{pmatrix}
+\qquad
+s_6 =
 \begin{pmatrix}
 1&0&1\\
 0&1&0\\
 0&0&1
 \end{pmatrix}.
-\end{aligned}
 $$
 
 This generating set is already symmetric:
@@ -447,18 +445,128 @@ For this run, computing the table and generating the SAT problem are essentially
 
 ## Returned unit
 
-The satisfying assignment produces supports of sizes
+The satisfying assignment produces two supports of sizes
 
 $$
 |A|=|B|=29.
 $$
 
-The matrices in the two supports can be displayed directly with
+They can be inspected directly with
 
 ```python
 >>> result[0]
 >>> result[1]
 ```
+
+The first support is
+
+The first support $A$ consists of the following 29 matrices:
+
+$`\begin{pmatrix}-1&-1&0\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&0\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&0\\0&-1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&0\\0&-1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&1\\0&1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&-1\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&0\\0&1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&0\\0&1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&1\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&-1\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&0\\0&1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&0\\0&1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&1\\0&-1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&-1\\0&-1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&-1\\0&-1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&1\\0&-1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&1\\0&-1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&-1\\0&1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&1\\0&1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&-1\\0&1&-1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&1\\0&1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&-2&1\\0&1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&-1\\0&1&-2\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&0&-1\\0&1&2\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&2&1\\0&1&0\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&-1&-1\\0&-1&-2\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}-1&1&-1\\0&-1&2\\0&0&1\end{pmatrix}`$,
+$`\begin{pmatrix}1&-2&1\\0&-1&1\\0&0&-1\end{pmatrix}`$,
+$`\begin{pmatrix}1&2&1\\0&-1&-1\\0&0&-1\end{pmatrix}`$.
+
+
+The second support is obtained **elementwise** from the first by applying the involution $\tau$:
+
+$$
+B=\tau(A)=\{\tau(a):a\in A\},
+$$
+
+where
+
+$$
+\tau(M)=(JMJ)^{-T},
+\qquad
+J=
+\begin{pmatrix}
+0&0&1\\
+0&1&0\\
+1&0&0
+\end{pmatrix}.
+$$
+
+Thus, if
+
+$$
+A=\{a_1,\ldots,a_{29}\},
+$$
+
+then
+
+$$
+B=\{\tau(a_1),\ldots,\tau(a_{29})\}.
+$$
+
+Although $\tau$ acts on every element individually, the resulting supports are almost identical as sets. In fact,
+
+$$
+|A\cap B|=28.
+$$
+
+Hence the two 29-element supports differ in only one element each. More precisely,
+
+$$
+A\setminus B=
+\{
+\begin{pmatrix}
+1&0&1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}
+\},
+\qquad
+B\setminus A=
+\{
+\begin{pmatrix}
+1&0&-1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}
+\}.
+$$
+
+Thus $\tau$ maps the support $A$ to a support $B$ sharing 28 of its 29 elements with $A$; as sets, the only change is
+
+$$
+\begin{pmatrix}
+1&0&1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}
+\quad\longleftrightarrow\quad
+\begin{pmatrix}
+1&0&-1\\
+0&1&0\\
+0&0&1
+\end{pmatrix}.
+$$
 
 The corresponding group-algebra elements are
 
@@ -468,7 +576,7 @@ $$
 \beta=\sum_{b\in B}b.
 $$
 
-After recovering the supports from the satisfying assignment, the program computes their product directly in the group algebra over $\mathbb F_2$ and verifies that
+After recovering the support $A$ from the satisfying assignment and obtaining $B$ by applying $\tau$ elementwise, the program computes their product directly in the group algebra over $\mathbb F_2$ and verifies that
 
 $$
 \alpha\beta=1.
@@ -488,7 +596,7 @@ $$
 
 This reproduces Gardam's result that the $\mathbb F_2$-group algebra of the Soelberg group contains non-trivial units.
 
----
+
 
 # Comparison
 
